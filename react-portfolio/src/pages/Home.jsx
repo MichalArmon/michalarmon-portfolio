@@ -1,12 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import Hero from "../components/Hero";
 
 function Home() {
-  return (
-    <Box sx={{ minHeight: "100vh", p: 4 }}>
-      <Typography variant="h2">Michal Armon</Typography>
-      <Typography variant="h5">Architecture • Design • Development</Typography>
-    </Box>
-  );
+  return <Hero />;
 }
 
 export default Home;
