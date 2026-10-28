@@ -38,22 +38,21 @@ function Hero() {
   return (
     <Box
       component="header"
+      id="home"
       sx={{
-        minHeight: "calc(100vh - 64px)",
+        minHeight: "calc(100vh - 150px)",
         display: "flex",
         alignItems: "center",
         position: "relative",
         overflow: "hidden",
-
         background: `linear-gradient(
-  to bottom,
-  #F8B195 0%,
-  #F67280 25%,
-  #C06C84 50%,
-  #6C5B7B 75%,
-  #355C7D 100%
-)`,
-
+          to bottom,
+          #F8B195 0%,
+          #F67280 25%,
+          #C06C84 50%,
+          #6C5B7B 75%,
+          #355C7D 100%
+        )`,
         color: "white",
         py: 10,
       }}
@@ -126,7 +125,7 @@ function Hero() {
 
         <Button
           variant="contained"
-          href="/projects"
+          href="#projects"
           size="large"
           sx={{
             bgcolor: "#355C7D",

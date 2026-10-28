@@ -11,10 +11,10 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 const links = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "About", href: "/#aboutMe" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "#home" },
+  { label: "Projects", href: "#projects" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
 ];
 
 function Navbar() {
@@ -29,6 +29,7 @@ function Navbar() {
           backgroundColor: "transparent",
           boxShadow: "none",
           zIndex: 1100,
+          marginTop: 2,
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -41,7 +42,7 @@ function Navbar() {
               component="img"
               src="/SVG/logo1_1.svg"
               alt="Michal Armon"
-              sx={{ width: 100 }}
+              sx={{ width: 150 }}
             />
           </Box>
 
