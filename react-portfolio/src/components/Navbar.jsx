@@ -23,10 +23,12 @@ function Navbar() {
   return (
     <>
       <AppBar
-        position="sticky"
+        position="absolute"
         elevation={0}
         sx={{
-          bgcolor: "#355C7D",
+          backgroundColor: "transparent",
+          boxShadow: "none",
+          zIndex: 1100,
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>

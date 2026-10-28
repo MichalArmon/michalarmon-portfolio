@@ -1,10 +1,37 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 
+const circleGradient = `radial-gradient(
+  circle,
+  #F8B195 0%,
+  #F67280 50%,
+  #355C7D 100%
+)`;
+
 const circles = [
-  { size: 420, top: "-180px", left: "-140px", color: "#F8B195" },
-  { size: 250, top: "12%", right: "-100px", color: "#C06C84" },
-  { size: 180, bottom: "-50px", left: "12%", color: "#F67280" },
-  { size: 110, bottom: "18%", right: "20%", color: "#6C5B7B" },
+  {
+    size: 420,
+    top: "-180px",
+    left: "-140px",
+    gradient: "radial-gradient(circle, #F8B195, #C06C84)",
+  },
+  {
+    size: 250,
+    top: "12%",
+    right: "-100px",
+    gradient: "radial-gradient(circle, #C06C84, #6C5B7B)",
+  },
+  {
+    size: 180,
+    bottom: "-50px",
+    left: "12%",
+    gradient: "radial-gradient(circle, #F67280, #F8B195)",
+  },
+  {
+    size: 110,
+    bottom: "18%",
+    right: "20%",
+    gradient: "radial-gradient(circle, #6C5B7B, #355C7D)",
+  },
 ];
 
 function Hero() {
@@ -17,7 +44,16 @@ function Hero() {
         alignItems: "center",
         position: "relative",
         overflow: "hidden",
-        bgcolor: "#6C5B7B",
+
+        background: `linear-gradient(
+  to bottom,
+  #F8B195 0%,
+  #F67280 25%,
+  #C06C84 50%,
+  #6C5B7B 75%,
+  #355C7D 100%
+)`,
+
         color: "white",
         py: 10,
       }}
@@ -30,7 +66,7 @@ function Hero() {
             width: circle.size,
             height: circle.size,
             borderRadius: "50%",
-            bgcolor: circle.color,
+            background: circleGradient,
             top: circle.top,
             bottom: circle.bottom,
             left: circle.left,

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 382.9 388.04">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="_Grid_Repeat_" data-name="&amp;lt;Grid Repeat&amp;gt;">
+      <rect class="cls-2" x="2" y="57.15" width="158.55" height="152.43" rx="11.49" ry="11.49"/>
+    </g>
+    <g id="_Grid_Repeat_-2" data-name="&amp;lt;Grid Repeat&amp;gt;">
+      <rect class="cls-2" x="196.44" y="30.98" width="158.55" height="152.43" rx="11.49" ry="11.49" transform="translate(4.96 226.35) rotate(-45)"/>
+    </g>
+    <g id="_Grid_Repeat_-3" data-name="&amp;lt;Grid Repeat&amp;gt;">
+      <rect class="cls-2" x="2" y="223.58" width="158.55" height="152.43" rx="11.49" ry="11.49"/>
+    </g>
+    <g id="_Grid_Repeat_-4" data-name="&amp;lt;Grid Repeat&amp;gt;">
+      <rect class="cls-2" x="174.55" y="223.58" width="158.55" height="152.43" rx="11.49" ry="11.49"/>
+    </g>
+    <rect class="cls-1" x=".5" y="55.65" width="340.05" height="332.39"/>
+  </g>
+</svg>
