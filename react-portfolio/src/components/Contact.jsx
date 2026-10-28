@@ -1,66 +1,56 @@
-import { useState } from "react";
 import {
   Box,
   Container,
   Typography,
-  TextField,
+  Input,
+  FormControl,
+  FormLabel,
   Button,
-  Grid,
   Alert,
+  Stack,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { useForm, ValidationError } from "@formspree/react";
 
-const initialForm = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
+const inputStyles = {
+  color: "#fff",
+  fontSize: "1rem",
+  px: 1,
+  py: 0.7,
+  borderRadius: "4px",
+  transition: "background-color 0.25s ease",
+
+  "&:before": {
+    borderBottom: "1px solid rgba(255,255,255,0.65)",
+  },
+  "&:hover:not(.Mui-disabled):before": {
+    borderBottom: "1px solid white",
+  },
+  "&:after": {
+    borderBottom: "1px solid white",
+  },
+  "&.Mui-focused": {
+    backgroundColor: "rgba(255,255,255,0.12)",
+  },
+  "& input, & textarea": {
+    color: "#fff",
+    WebkitTextFillColor: "#fff",
+    caretColor: "#fff",
+  },
+  "& input:-webkit-autofill": {
+    WebkitBoxShadow: "0 0 0 1000px #D98698 inset",
+    WebkitTextFillColor: "#fff !important",
+  },
+};
+
+const labelStyles = {
+  color: "rgba(255,255,255,0.9)",
+  mb: 1,
+  fontSize: "0.95rem",
 };
 
 function Contact() {
-  const [formData, setFormData] = useState(initialForm);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    setSubmitted(false);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Connect to an API or email service here.
-    console.log("Contact form data:", formData);
-    setSubmitted(true);
-  };
-
-  const fieldStyles = {
-    "& .MuiInputBase-root": {
-      color: "white",
-      fontSize: "1.1rem",
-    },
-    "& .MuiInputLabel-root": {
-      color: "rgba(255,255,255,0.85)",
-    },
-    "& .MuiInputLabel-root.Mui-focused": {
-      color: "white",
-    },
-    "& .MuiInput-underline:before": {
-      borderBottomColor: "rgba(255,255,255,0.7)",
-    },
-    "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
-      borderBottomColor: "white",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "white",
-    },
-  };
+  const [state, handleSubmit, reset] = useForm("xoeewogq");
 
   return (
     <Box
@@ -71,28 +61,16 @@ function Contact() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        position: "relative",
-        overflow: "hidden",
+        py: { xs: 7, md: 10 },
         color: "white",
-        py: { xs: 10, md: 12 },
-
         background:
           "linear-gradient(135deg, #F8B195, #F67280, #C06C84, #6C5B7B, #355C7D)",
         backgroundSize: "300% 300%",
         animation: "gradientMove 8s ease infinite",
-
         "@keyframes gradientMove": {
-          "0%": {
-            backgroundPosition: "0% 50%",
-          },
-          "50%": {
-            backgroundPosition: "100% 50%",
-          },
-          "100%": {
-            backgroundPosition: "0% 50%",
-          },
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
         },
-
         "@media (prefers-reduced-motion: reduce)": {
           animation: "none",
         },
@@ -103,123 +81,125 @@ function Contact() {
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            border: "1px solid rgba(255,255,255,0.7)",
+            border: "1px solid rgba(255,255,255,0.6)",
             borderRadius: "20px",
-            backgroundColor: "rgba(255,255,255,0.19)",
-            backdropFilter: "blur(10px)",
-            padding: {
-              xs: "40px 24px",
-              sm: "60px 50px",
-              md: "100px 80px",
-            },
-            boxShadow: "0 20px 60px rgba(0,0,0,0.1)",
+            backgroundColor: "rgba(255,255,255,0.10)",
+            backdropFilter: "blur(8px)",
+            p: { xs: 3, sm: 5, md: 6 },
           }}
         >
           <Typography
             component="h2"
             sx={{
-              fontSize: { xs: "2rem", md: "2.8rem" },
+              fontSize: { xs: "1.8rem", md: "2.4rem" },
               fontWeight: 600,
-              mb: 6,
-              textAlign: { xs: "center", md: "left" },
+              mb: 2,
+              lineHeight: 1.2,
             }}
           >
-            Let's Get in Touch
+            Let's Build Something Together.
           </Typography>
 
-          <Typography
-            sx={{
-              mb: 5,
-              fontSize: "1.1rem",
-              lineHeight: 1.8,
-            }}
-          >
-            Have a project in mind or just want to say hello? Leave your details
-            and I'll get back to you.
+          <Typography sx={{ mb: 5, opacity: 0.9 }}>
+            Whether you have a clear vision or just an idea, I'd love to hear
+            about it.
           </Typography>
 
-          <Grid container spacing={4}>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField
-                fullWidth
-                required
-                variant="standard"
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                sx={fieldStyles}
-              />
-            </Grid>
+          {state.succeeded ? (
+            <Stack spacing={3}>
+              <Alert severity="success">
+                Thanks for reaching out! Your message has been sent.
+              </Alert>
+              <Button
+                variant="outlined"
+                onClick={reset}
+                sx={{
+                  color: "white",
+                  borderColor: "white",
+                  alignSelf: "flex-start",
+                }}
+              >
+                Send Another Message
+              </Button>
+            </Stack>
+          ) : (
+            <Stack spacing={3.5}>
+              <FormControl fullWidth required>
+                <FormLabel htmlFor="contact-name" sx={labelStyles}>
+                  Name
+                </FormLabel>
+                <Input
+                  id="contact-name"
+                  name="name"
+                  required
+                  autoComplete="name"
+                  sx={inputStyles}
+                />
+              </FormControl>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField
-                fullWidth
-                required
-                variant="standard"
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                sx={fieldStyles}
-              />
-            </Grid>
+              <FormControl fullWidth required>
+                <FormLabel htmlFor="contact-email" sx={labelStyles}>
+                  Email
+                </FormLabel>
+                <Input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  sx={inputStyles}
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
+                />
+              </FormControl>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField
-                fullWidth
-                required
-                type="email"
-                variant="standard"
-                label="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                sx={fieldStyles}
-              />
-            </Grid>
+              <FormControl fullWidth required>
+                <FormLabel htmlFor="contact-message" sx={labelStyles}>
+                  What can I help you with?
+                </FormLabel>
+                <Input
+                  id="contact-message"
+                  name="message"
+                  required
+                  multiline
+                  minRows={3}
+                  sx={inputStyles}
+                />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
+                />
+              </FormControl>
 
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField
-                fullWidth
-                variant="standard"
-                label="Phone"
-                name="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={handleChange}
-                sx={fieldStyles}
-              />
-            </Grid>
-          </Grid>
+              <ValidationError errors={state.errors} />
 
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            endIcon={<SendIcon />}
-            sx={{
-              mt: 7,
-              px: 5,
-              py: 1.6,
-              bgcolor: "#355C7D",
-              color: "white",
-              borderRadius: "30px",
-              fontWeight: 700,
-              textTransform: "none",
-              fontSize: "1.1rem",
-              "&:hover": {
-                bgcolor: "#26445E",
-              },
-            }}
-          >
-            Send Message
-          </Button>
-
-          {submitted && (
-            <Alert severity="info" sx={{ mt: 3 }}>
-              Form validated locally. Message delivery is not connected yet.
-            </Alert>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={state.submitting}
+                endIcon={<SendIcon />}
+                sx={{
+                  alignSelf: "flex-start",
+                  mt: 1,
+                  px: 4,
+                  py: 1.5,
+                  bgcolor: "#355C7D",
+                  color: "white",
+                  borderRadius: "30px",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  "&:hover": {
+                    bgcolor: "#26445E",
+                  },
+                }}
+              >
+                {state.submitting ? "Sending..." : "Send Message"}
+              </Button>
+            </Stack>
           )}
         </Box>
       </Container>
