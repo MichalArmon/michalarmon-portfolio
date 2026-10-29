@@ -6,6 +6,7 @@ import Contact from "./components/Contact";
 import StackedSection from "./components/StackedSection";
 import LogoAnimation from "./components/LogoAnimation";
 import { useState } from "react";
+import Landing01 from "./landingPages/landing01/Landing01";
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -18,7 +19,7 @@ function App() {
         <Hero />
       </StackedSection>
 
-      <StackedSection index={1}>
+      <StackedSection index={1} long>
         <Projects />
       </StackedSection>
 
