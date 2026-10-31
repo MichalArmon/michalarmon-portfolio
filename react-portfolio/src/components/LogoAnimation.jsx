@@ -8,7 +8,7 @@ function LogoAnimation({ onEnter }) {
     if (!isMobile) return;
 
     // Automatically enter after the animation
-    const timer = setTimeout(onEnter, 2800);
+    const timer = setTimeout(onEnter, 3800);
 
     return () => clearTimeout(timer);
   }, [isMobile, onEnter]);
