@@ -11,6 +11,7 @@ function About() {
         minHeight: "100vh",
         bgcolor: "white",
         overflow: "hidden",
+        scrollMarginTop: { xs: "72px", md: "88px" },
 
         "@keyframes slideInLeft": {
           from: {
@@ -24,36 +25,39 @@ function About() {
         },
       }}
     >
-      {/* HEADER WITH BACKGROUND IMAGE */}
+      {/* HEADER */}
       <Box
         sx={{
           position: "relative",
-          minHeight: { xs: "65vh", md: "750px" },
+          minHeight: { xs: "auto", md: "750px" },
           display: "flex",
-          alignItems: "flex-end",
+          alignItems: { xs: "center", md: "flex-end" },
           overflow: "hidden",
-          color: "white",
+          color: { xs: "#292532", md: "white" },
+          bgcolor: { xs: "#FFFFFF", md: "transparent" },
         }}
       >
-        {/* Background image */}
-        {/* Background image */}
+        {/* DESKTOP BACKGROUND IMAGE */}
         <Box
           component="img"
           src="/img/about2.jpg"
-          alt="About Michal"
+          alt=""
+          aria-hidden="true"
           sx={{
+            display: { xs: "none", md: "block" },
             position: "absolute",
             inset: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: { xs: "80% center", md: "center" },
+            objectPosition: "center",
           }}
         />
 
-        {/* Gradient overlay */}
+        {/* DESKTOP GRADIENT */}
         <Box
           sx={{
+            display: { xs: "none", md: "block" },
             position: "absolute",
             inset: 0,
             background: `linear-gradient(
@@ -65,54 +69,97 @@ function About() {
           }}
         />
 
-        {/* Heading content */}
+        {/* CONTENT */}
         <Container
           maxWidth="lg"
           sx={{
             position: "relative",
             zIndex: 1,
-            pb: { xs: 6, md: 10 },
-            textAlign: "left",
+            pt: { xs: 7, md: 0 },
+            pb: { xs: 8, md: 10 },
+            px: { xs: 3, md: 3 },
+            textAlign: { xs: "center", md: "left" },
           }}
         >
           <Box
             sx={{
-              animation: "slideInLeft 1.2s ease-out forwards",
+              animation: {
+                xs: "none",
+                md: "slideInLeft 1.2s ease-out forwards",
+              },
             }}
           >
+            {/* MOBILE CIRCULAR PHOTO */}
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+                justifyContent: "center",
+                mb: 5,
+              }}
+            >
+              <Box
+                component="img"
+                src="/img/about2-mobile.jpg"
+                alt="Michal Armon"
+                sx={{
+                  width: { xs: 210, sm: 250 },
+                  height: { xs: 210, sm: 250 },
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  border: "5px solid #FFFFFF",
+                  boxShadow: "0 12px 40px rgba(53,92,125,0.18)",
+                }}
+              />
+            </Box>
+
+            {/* HEADING */}
             <Typography
               component="h2"
               sx={{
-                fontSize: { xs: "2.8rem", md: "5rem" },
+                fontSize: { xs: "2.35rem", md: "5rem" },
                 fontWeight: 800,
                 lineHeight: 1.15,
+                letterSpacing: { xs: "-0.04em", md: "normal" },
                 mb: 2,
               }}
             >
               Nice to meet you,
-              <br />
-              I'm Michal.
+              <Box component="span" sx={{ display: "block" }}>
+                I'm Michal.
+              </Box>
             </Typography>
 
+            {/* SUBHEADING */}
             <Typography
               sx={{
-                fontSize: { xs: "1.5rem", md: "2.5rem" },
+                fontSize: { xs: "1.3rem", md: "2.5rem" },
                 fontWeight: 300,
                 mb: 3,
+                color: { xs: "#6C5B7B", md: "inherit" },
               }}
             >
               Former Architect.{" "}
-              <Box component="span" sx={{ fontWeight: 700 }}>
+              <Box
+                component="span"
+                sx={{
+                  fontWeight: 700,
+                  color: { xs: "#355C7D", md: "inherit" },
+                }}
+              >
                 Current Developer.
               </Box>
             </Typography>
 
+            {/* INTRO */}
             <Typography
               sx={{
                 fontSize: { xs: "1rem", md: "1.4rem" },
                 lineHeight: 1.8,
                 maxWidth: 750,
                 mb: 4,
+                mx: { xs: "auto", md: 0 },
+                color: { xs: "#77727D", md: "inherit" },
               }}
             >
               I develop websites and applications with creative thinking,
@@ -121,6 +168,7 @@ function About() {
               work.
             </Typography>
 
+            {/* BUTTON */}
             <Button
               variant="contained"
               size="large"
@@ -132,6 +180,7 @@ function About() {
                 py: 1.7,
                 borderRadius: "30px",
                 fontWeight: 700,
+                boxShadow: "0 5px 16px rgba(53,92,125,0.2)",
                 "&:hover": {
                   bgcolor: "#26445E",
                 },
@@ -157,11 +206,9 @@ function About() {
             color: "#1C1C1C",
             fontSize: { xs: "1.05rem", md: "1.4rem" },
             lineHeight: 1.9,
-
             "& p": {
               mb: 4,
             },
-
             "& p:first-of-type": {
               fontWeight: 600,
             },
