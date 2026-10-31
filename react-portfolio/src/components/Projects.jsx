@@ -1,4 +1,5 @@
-import { Box, Container, Typography, Grid } from "@mui/material";
+import { Box, Container, Typography, Grid, useMediaQuery } from "@mui/material";
+
 import { motion, useReducedMotion } from "motion/react";
 import ProjectCard from "./ProjectCard";
 
@@ -132,17 +133,31 @@ const categories = [
 
 function Projects() {
   const reduceMotion = useReducedMotion();
+  const isMobile = useMediaQuery("(max-width:899px)");
+
+  // Disable reveal animations on mobile to keep titles visible.
+  const disableAnimations = reduceMotion || isMobile;
 
   const reveal = (delay = 0, y = 35) => ({
-    initial: reduceMotion ? false : { opacity: 0, y },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
+    initial: disableAnimations ? false : { opacity: 0, y },
+
+    whileInView: disableAnimations ? undefined : { opacity: 1, y: 0 },
+
+    viewport: {
+      once: true,
+      amount: 0.2,
+    },
+
     transition: {
       duration: 0.75,
       delay,
       ease: [0.22, 1, 0.36, 1],
     },
   });
+
+  const filteredCategories = categories.filter(
+    (category) => category.projects.length > 0,
+  );
 
   return (
     <Box
@@ -152,9 +167,12 @@ function Projects() {
         bgcolor: "background.default",
         color: "text.primary",
         pt: { xs: 6, md: 16 },
-        pb: { xs: 0, md: 16 },
+        pb: { xs: 0, md: 4 },
         overflow: "hidden",
-        scrollMarginTop: { xs: "72px", md: "88px" },
+        scrollMarginTop: {
+          xs: "72px",
+          md: "88px",
+        },
       }}
     >
       <Container maxWidth="lg">
@@ -174,7 +192,8 @@ function Projects() {
             SELECTED WORK / 2026
           </MotionTypography>
 
-          <Box sx={{ overflow: "hidden", pb: 2 }}>
+          {/* MAIN TITLE */}
+          <Box sx={{ overflow: "visible", pb: 2 }}>
             <MotionTypography
               component="h2"
               {...reveal(0.1, 70)}
@@ -184,9 +203,15 @@ function Projects() {
                   md: "clamp(5.5rem, 9vw, 8.5rem)",
                 },
                 fontWeight: 700,
-                lineHeight: 0.98,
+                lineHeight: 1.08,
                 letterSpacing: "-0.075em",
                 m: 0,
+
+                // Keep text visible even if mobile motion is unavailable.
+                ...(disableAnimations && {
+                  opacity: 1,
+                  transform: "none",
+                }),
               }}
             >
               My{" "}
@@ -204,6 +229,7 @@ function Projects() {
             </MotionTypography>
           </Box>
 
+          {/* INTRO */}
           <MotionTypography
             {...reveal(0.3)}
             sx={{
@@ -220,131 +246,131 @@ function Projects() {
         </Box>
 
         {/* CATEGORIES */}
-        {categories
-          .filter((category) => category.projects.length > 0)
-          .map((category, index, filteredCategories) => {
-            const isLast = index === filteredCategories.length - 1;
+        {filteredCategories.map((category, index) => {
+          const isLast = index === filteredCategories.length - 1;
 
-            return (
+          return (
+            <Box
+              key={category.id}
+              id={category.id}
+              sx={{
+                position: "relative",
+                mb: {
+                  xs: isLast ? 0 : 6,
+                  md: isLast ? 0 : 12,
+                },
+                scrollMarginTop: "100px",
+              }}
+            >
+              {/* CATEGORY HEADER */}
               <Box
-                key={category.id}
-                id={category.id}
                 sx={{
                   position: "relative",
-                  mb: {
-                    xs: isLast ? 0 : 6,
-                    md: isLast ? 0 : 12,
-                  },
-                  scrollMarginTop: "100px",
+                  mb: { xs: 4, md: 8 },
                 }}
               >
-                {/* CATEGORY HEADER */}
-                <Box
+                {/* DECORATIVE NUMBER */}
+                <MotionTypography
+                  aria-hidden="true"
+                  {...reveal(0, 20)}
                   sx={{
-                    position: "relative",
-                    mb: { xs: 4, md: 8 },
+                    position: "absolute",
+                    right: { xs: 0, md: 20 },
+                    top: { xs: -30, md: -75 },
+                    fontSize: { xs: 105, md: 190 },
+                    fontWeight: 800,
+                    lineHeight: 1,
+                    letterSpacing: "-0.09em",
+                    color: "#C06C84",
+                    opacity: disableAnimations ? 0.1 : undefined,
+                    pointerEvents: "none",
+                    userSelect: "none",
                   }}
                 >
-                  {/* DECORATIVE NUMBER */}
-                  <MotionTypography
-                    aria-hidden="true"
-                    {...reveal(0, 20)}
-                    sx={{
-                      position: "absolute",
-                      right: { xs: 0, md: 20 },
-                      top: { xs: -30, md: -75 },
-                      fontSize: { xs: 105, md: 190 },
-                      fontWeight: 800,
-                      lineHeight: 1,
-                      letterSpacing: "-0.09em",
-                      color: "#C06C84",
-                      opacity: 0.1,
-                      pointerEvents: "none",
-                      userSelect: "none",
-                    }}
-                  >
-                    {category.number}
-                  </MotionTypography>
+                  {category.number}
+                </MotionTypography>
 
-                  {/* EYEBROW */}
+                {/* EYEBROW */}
+                <MotionTypography
+                  {...reveal(0.05)}
+                  sx={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.22em",
+                    color: "secondary.main",
+                    mb: 2,
+                    position: "relative",
+                  }}
+                >
+                  {category.number} / SELECTED WORK
+                </MotionTypography>
+
+                {/* CATEGORY TITLE */}
+                <Box sx={{ overflow: "visible", pb: 2 }}>
                   <MotionTypography
-                    {...reveal(0.05)}
+                    component="h3"
+                    {...reveal(0.12, 55)}
                     sx={{
-                      fontSize: 11,
+                      fontSize: {
+                        xs: "clamp(2.3rem, 7vw, 3.5rem)",
+                        md: "clamp(3.2rem, 5vw, 5rem)",
+                      },
                       fontWeight: 700,
-                      letterSpacing: "0.22em",
-                      color: "secondary.main",
-                      mb: 2,
+                      letterSpacing: "-0.055em",
+                      lineHeight: 1.15,
                       position: "relative",
+                      m: 0,
+
+                      ...(disableAnimations && {
+                        opacity: 1,
+                        transform: "none",
+                      }),
                     }}
                   >
-                    {category.number} / SELECTED WORK
-                  </MotionTypography>
-
-                  {/* CATEGORY TITLE */}
-                  <Box sx={{ overflow: "hidden", pb: 2 }}>
-                    <MotionTypography
-                      component="h3"
-                      {...reveal(0.12, 55)}
-                      sx={{
-                        fontSize: {
-                          xs: "clamp(2.3rem, 7vw, 3.5rem)",
-                          md: "clamp(3.2rem, 5vw, 5rem)",
-                        },
-                        fontWeight: 700,
-                        letterSpacing: "-0.055em",
-                        lineHeight: 1.08,
-                        position: "relative",
-                        m: 0,
-                      }}
-                    >
-                      {category.title}
-                    </MotionTypography>
-                  </Box>
-
-                  {/* CATEGORY DESCRIPTION */}
-                  <MotionTypography
-                    {...reveal(0.22)}
-                    sx={{
-                      fontSize: { xs: 15, md: 17 },
-                      lineHeight: 1.85,
-                      color: "text.secondary",
-                      maxWidth: 620,
-                      mt: 2,
-                      position: "relative",
-                    }}
-                  >
-                    {category.description}
+                    {category.title}
                   </MotionTypography>
                 </Box>
 
-                {/* PROJECT GRID */}
-                <Grid container spacing={{ xs: 5, md: 5 }} alignItems="stretch">
-                  {category.projects.map((project) => (
-                    <Grid
-                      key={project.id}
-                      size={{ xs: 12, md: 6 }}
-                      sx={{ display: "flex" }}
-                    >
-                      <ProjectCard project={project} />
-                    </Grid>
-                  ))}
-                </Grid>
+                {/* CATEGORY DESCRIPTION */}
+                <MotionTypography
+                  {...reveal(0.22)}
+                  sx={{
+                    fontSize: { xs: 15, md: 17 },
+                    lineHeight: 1.85,
+                    color: "text.secondary",
+                    maxWidth: 620,
+                    mt: 2,
+                    position: "relative",
+                  }}
+                >
+                  {category.description}
+                </MotionTypography>
+              </Box>
 
-                {/* ANIMATED DIVIDER */}
+              {/* PROJECT GRID */}
+              <Grid container spacing={{ xs: 5, md: 5 }} alignItems="stretch">
+                {category.projects.map((project) => (
+                  <Grid
+                    key={project.id}
+                    size={{ xs: 12, md: 6 }}
+                    sx={{ display: "flex" }}
+                  >
+                    <ProjectCard project={project} />
+                  </Grid>
+                ))}
+              </Grid>
+
+              {/* ANIMATED DIVIDER */}
+              {!isLast && (
                 <MotionBox
-                  initial={reduceMotion ? false : { scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
+                  initial={disableAnimations ? false : { scaleX: 0 }}
+                  whileInView={disableAnimations ? undefined : { scaleX: 1 }}
                   viewport={{ once: true }}
                   transition={{
                     duration: 1,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   sx={{
-                    display: {
-                      xs: isLast ? "none" : "block",
-                      md: "block",
-                    },
                     mt: { xs: 5, md: 14 },
                     height: "1px",
                     width: "100%",
@@ -352,9 +378,10 @@ function Projects() {
                     transformOrigin: "left",
                   }}
                 />
-              </Box>
-            );
-          })}
+              )}
+            </Box>
+          );
+        })}
       </Container>
     </Box>
   );
