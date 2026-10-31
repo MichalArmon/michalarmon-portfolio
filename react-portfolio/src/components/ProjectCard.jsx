@@ -1,4 +1,11 @@
-import { Box, Typography, Chip, Stack, Card } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Chip,
+  Stack,
+  Card,
+  useMediaQuery,
+} from "@mui/material";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
 import ImageNotSupportedOutlinedIcon from "@mui/icons-material/ImageNotSupportedOutlined";
 import { Link as RouterLink } from "react-router-dom";
@@ -8,6 +15,9 @@ const MotionCard = motion.create(Card);
 
 function ProjectCard({ project }) {
   const reduceMotion = useReducedMotion();
+  const isMobile = useMediaQuery("(max-width:899px)");
+  const disableAnimations = reduceMotion || isMobile;
+
   const isExternal = /^https?:\/\//i.test(project.link ?? "");
 
   const linkProps = !project.link
@@ -29,14 +39,14 @@ function ProjectCard({ project }) {
   return (
     <MotionCard
       {...linkProps}
-      initial={reduceMotion ? false : { opacity: 0, y: 35 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={disableAnimations ? false : { opacity: 0, y: 35 }}
+      whileInView={disableAnimations ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{
-        duration: 0.65,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.5,
+        ease: "easeOut",
       }}
-      whileHover={project.link && !reduceMotion ? { y: -6 } : undefined}
+      whileHover={project.link && !disableAnimations ? { y: -6 } : undefined}
       elevation={0}
       sx={{
         height: "100%",
@@ -53,13 +63,13 @@ function ProjectCard({ project }) {
         position: "relative",
 
         "&:hover .project-image": {
-          transform: reduceMotion ? "none" : "scale(1.065)",
+          transform: disableAnimations ? "none" : "scale(1.04)",
         },
 
         "&:hover .project-arrow": {
           bgcolor: "#F67280",
           color: "#FFFFFF",
-          transform: reduceMotion ? "none" : "translate(3px, -3px)",
+          transform: disableAnimations ? "none" : "translate(3px, -3px)",
         },
 
         "&:hover .project-title": {
@@ -91,12 +101,14 @@ function ProjectCard({ project }) {
             src={project.image}
             alt={project.title}
             loading="lazy"
+            decoding="async"
             sx={{
               display: "block",
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              transition: "transform .75s cubic-bezier(.22,1,.36,1)",
+              transition: disableAnimations ? "none" : "transform .5s ease",
+              willChange: "auto",
             }}
           />
         ) : (
@@ -129,11 +141,13 @@ function ProjectCard({ project }) {
               bgcolor: "rgba(255,255,255,.94)",
               color: "#383043",
               boxShadow: "0 4px 18px rgba(30,25,40,.10)",
-              backdropFilter: "blur(10px)",
+              backdropFilter: isMobile ? "none" : "blur(10px)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              transition: "all .35s cubic-bezier(.22,1,.36,1)",
+              transition: disableAnimations
+                ? "none"
+                : "background-color .3s ease, color .3s ease, transform .3s ease",
             }}
           >
             <NorthEastIcon sx={{ fontSize: 21 }} />
@@ -177,7 +191,7 @@ function ProjectCard({ project }) {
             letterSpacing: "-0.035em",
             mb: 1.5,
             color: "#292532",
-            transition: "color .3s ease",
+            transition: disableAnimations ? "none" : "color .3s ease",
           }}
         >
           {project.title}
