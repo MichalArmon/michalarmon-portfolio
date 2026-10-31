@@ -1,4 +1,15 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography, Stack } from "@mui/material";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+const colors = {
+  ink: "#292532",
+  muted: "#77727D",
+  rose: "#C06C84",
+  peach: "#F8B195",
+  purple: "#6C5B7B",
+  blue: "#355C7D",
+  pale: "#F8F6F8",
+};
 
 function About() {
   return (
@@ -6,38 +17,24 @@ function About() {
       id="aboutMe"
       component="section"
       sx={{
-        position: "relative",
-        width: "100%",
-        minHeight: { xs: "auto", md: "100vh" },
-        bgcolor: "white",
+        bgcolor: colors.pale,
+        color: colors.ink,
         overflow: "hidden",
         scrollMarginTop: { xs: "72px", md: "88px" },
-
-        "@keyframes slideInLeft": {
-          from: {
-            opacity: 0,
-            transform: "translateX(-50px)",
-          },
-          to: {
-            opacity: 1,
-            transform: "translateX(0)",
-          },
-        },
       }}
     >
-      {/* HEADER */}
+      {/* INTRODUCTION */}
       <Box
         sx={{
           position: "relative",
-          minHeight: { xs: "auto", md: "750px" },
+          minHeight: { xs: "auto", md: "720px" },
           display: "flex",
-          alignItems: { xs: "center", md: "flex-end" },
-          overflow: "hidden",
-          color: { xs: "#292532", md: "white" },
-          bgcolor: { xs: "#FFFFFF", md: "transparent" },
+          alignItems: "flex-end",
+          bgcolor: { xs: colors.pale, md: colors.blue },
+          color: { xs: colors.ink, md: "#FFFFFF" },
         }}
       >
-        {/* DESKTOP BACKGROUND IMAGE */}
+        {/* DESKTOP PHOTO */}
         <Box
           component="img"
           src="/img/about2.jpg"
@@ -54,214 +51,321 @@ function About() {
           }}
         />
 
-        {/* DESKTOP GRADIENT */}
+        {/* DESKTOP OVERLAY */}
         <Box
           sx={{
             display: { xs: "none", md: "block" },
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(
-              to top,
-              rgba(53, 92, 125, 0.95) 0%,
-              rgba(108, 91, 123, 0.65) 45%,
-              rgba(0, 0, 0, 0.1) 100%
-            )`,
+            background: `
+              linear-gradient(
+                90deg,
+                rgba(29, 31, 47, 0.86) 0%,
+                rgba(49, 45, 66, 0.72) 45%,
+                rgba(53, 92, 125, 0.10) 100%
+              )
+            `,
           }}
         />
 
-        {/* CONTENT */}
         <Container
           maxWidth="lg"
           sx={{
             position: "relative",
             zIndex: 1,
-            pt: { xs: 2, md: 0 },
-            pb: { xs: 5, md: 10 },
-            px: { xs: 3, md: 3 },
-            textAlign: { xs: "center", md: "left" },
+            pt: { xs: 3, md: 18 },
+            pb: { xs: 9, md: 12 },
+            px: { xs: 3, md: 4 },
           }}
         >
+          {/* MOBILE PORTRAIT */}
           <Box
             sx={{
-              animation: {
-                xs: "none",
-                md: "slideInLeft 1.2s ease-out forwards",
+              display: { xs: "flex", md: "none" },
+              justifyContent: "center",
+              mb: 6,
+            }}
+          >
+            <Box
+              component="img"
+              src="/img/about2-mobile.jpg"
+              alt="Michal Armon"
+              loading="lazy"
+              decoding="async"
+              sx={{
+                display: "block",
+                width: "min(80vw, 330px)",
+                height: "auto",
+                aspectRatio: "1 / 1",
+                borderRadius: "50%",
+                objectFit: "cover",
+                objectPosition: "center",
+                boxShadow: "0 18px 48px rgba(53,92,125,0.15)",
+              }}
+            />
+          </Box>
+
+          {/* EYEBROW */}
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              color: { xs: colors.rose, md: colors.peach },
+              textTransform: "uppercase",
+              mb: 3,
+            }}
+          >
+            ABOUT / MICHAL ARMON
+          </Typography>
+
+          {/* TITLE */}
+          <Typography
+            component="h2"
+            sx={{
+              maxWidth: 870,
+              fontSize: {
+                xs: "clamp(2.6rem, 9vw, 4rem)",
+                md: "clamp(4rem, 6vw, 6rem)",
+              },
+              fontWeight: 700,
+              letterSpacing: "-0.065em",
+              lineHeight: 1.07,
+              mb: 4,
+            }}
+          >
+            From designing spaces to building{" "}
+            <Box
+              component="span"
+              sx={{
+                color: { xs: colors.rose, md: colors.peach },
+                fontStyle: "italic",
+                fontWeight: 400,
+              }}
+            >
+              digital experiences.
+            </Box>
+          </Typography>
+
+          {/* INTRO */}
+          <Typography
+            sx={{
+              maxWidth: 680,
+              fontSize: { xs: 16, md: 20 },
+              lineHeight: 1.85,
+              color: {
+                xs: colors.muted,
+                md: "rgba(255,255,255,0.86)",
+              },
+              mb: 5,
+            }}
+          >
+            I'm Michal, a developer with a background in architecture and urban
+            planning. My work brings together design thinking, technical
+            problem-solving, and a longstanding interest in how people interact
+            with the spaces and systems around them.
+          </Typography>
+
+          <Button
+            href="#projects"
+            endIcon={<ArrowOutwardIcon />}
+            sx={{
+              px: 0,
+              py: 1.5,
+              borderRadius: 0,
+              color: { xs: colors.blue, md: "#FFFFFF" },
+              borderBottom: {
+                xs: `1px solid ${colors.blue}`,
+                md: "1px solid rgba(255,255,255,0.55)",
+              },
+              textTransform: "none",
+              fontWeight: 700,
+              fontSize: 14,
+              letterSpacing: "0.02em",
+              "&:hover": {
+                bgcolor: "transparent",
+                color: { xs: colors.rose, md: colors.peach },
               },
             }}
           >
-            {/* MOBILE CIRCULAR PHOTO */}
-            <Box
-              sx={{
-                display: { xs: "flex", md: "none" },
-                justifyContent: "center",
-                mb: { xs: 3, sm: 4 },
-              }}
-            >
-              <Box
-                component="img"
-                src="/img/about2-mobile.jpg"
-                alt="Michal Armon"
-                loading="lazy"
-                decoding="async"
-                sx={{
-                  width: { xs: 290, sm: 330 },
-                  height: { xs: 290, sm: 330 },
-                  maxWidth: "85vw",
-                  maxHeight: "85vw",
-                  aspectRatio: "1 / 1",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  border: "5px solid #FFFFFF",
-                  boxSizing: "border-box",
-                  boxShadow: "0 12px 40px rgba(53,92,125,0.18)",
-                  flexShrink: 0,
-                }}
-              />
-            </Box>
-
-            {/* HEADING */}
-            <Typography
-              component="h2"
-              sx={{
-                fontSize: { xs: "2.35rem", md: "5rem" },
-                fontWeight: 800,
-                lineHeight: 1.15,
-                letterSpacing: {
-                  xs: "-0.04em",
-                  md: "normal",
-                },
-                mb: 2,
-              }}
-            >
-              Nice to meet you,
-              <Box component="span" sx={{ display: "block" }}>
-                I'm Michal.
-              </Box>
-            </Typography>
-
-            {/* SUBHEADING */}
-            <Typography
-              sx={{
-                fontSize: { xs: "1.3rem", md: "2.5rem" },
-                fontWeight: 300,
-                mb: 3,
-                color: { xs: "#6C5B7B", md: "inherit" },
-              }}
-            >
-              Former Architect.{" "}
-              <Box
-                component="span"
-                sx={{
-                  fontWeight: 700,
-                  color: {
-                    xs: "#355C7D",
-                    md: "inherit",
-                  },
-                }}
-              >
-                Current Developer.
-              </Box>
-            </Typography>
-
-            {/* INTRO */}
-            <Typography
-              sx={{
-                fontSize: { xs: "1rem", md: "1.4rem" },
-                lineHeight: 1.8,
-                maxWidth: 750,
-                mb: 4,
-                mx: { xs: "auto", md: 0 },
-                color: {
-                  xs: "#77727D",
-                  md: "inherit",
-                },
-              }}
-            >
-              I develop websites and applications with creative thinking,
-              technical precision, and attention to detail. I combine design,
-              code, and real-world experience to create digital experiences that
-              work.
-            </Typography>
-
-            {/* BUTTON */}
-            <Button
-              variant="contained"
-              size="large"
-              href="#projects"
-              sx={{
-                bgcolor: "#355C7D",
-                color: "white",
-                px: 5,
-                py: 1.7,
-                borderRadius: "30px",
-                fontWeight: 700,
-                boxShadow: "0 5px 16px rgba(53,92,125,0.2)",
-                "&:hover": {
-                  bgcolor: "#26445E",
-                },
-              }}
-            >
-              MY WORK
-            </Button>
-          </Box>
+            Explore my work
+          </Button>
         </Container>
       </Box>
 
-      {/* ABOUT TEXT */}
+      {/* EDITORIAL ABOUT SECTION */}
       <Container
         maxWidth="lg"
         sx={{
-          py: { xs: 5, md: 12 },
+          pt: { xs: 8, md: 15 },
+          pb: { xs: 9, md: 18 },
+          px: { xs: 3, md: 4 },
         }}
       >
         <Box
           sx={{
-            maxWidth: 950,
-            mx: "auto",
-            color: "#1C1C1C",
-            fontSize: {
-              xs: "1.05rem",
-              md: "1.4rem",
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              md: "minmax(180px, 0.65fr) minmax(0, 1.6fr)",
             },
-            lineHeight: 1.9,
-
-            "& p": {
-              mb: 4,
-            },
-
-            "& p:first-of-type": {
-              fontWeight: 600,
-            },
+            columnGap: { md: 10 },
+            rowGap: 4,
           }}
         >
-          <Typography component="p" sx={{ fontSize: "inherit" }}>
-            My name is Michal Armon. I'm a web and application developer with
-            over 10 years of experience in architecture and urban planning. I
-            discovered coding out of curiosity and stayed because I found
-            everything I've always loved: problem-solving, systems thinking, and
-            attention to the smallest details.
-          </Typography>
+          {/* SECTION LABEL */}
+          <Box>
+            <Typography
+              sx={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.22em",
+                color: colors.rose,
+                mb: 2,
+              }}
+            >
+              01 / THE BACKGROUND
+            </Typography>
 
-          <Typography component="p" sx={{ fontSize: "inherit" }}>
-            Today, I combine a broad design perspective with technical
-            knowledge. I build accessible interfaces, responsive websites, and
-            interactive experiences designed around people.
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: 13,
+                color: colors.muted,
+              }}
+            >
+              A different route into development.
+            </Typography>
+          </Box>
 
-          <Typography component="p" sx={{ fontSize: "inherit" }}>
-            I studied Full Stack Development at HackerU, working with
-            technologies such as JavaScript, React, HTML, CSS, and Node.js,
-            alongside creative tools including Photoshop, Illustrator, and After
-            Effects.
-          </Typography>
+          {/* EDITORIAL COPY */}
+          <Box>
+            <Typography
+              component="h3"
+              sx={{
+                fontSize: {
+                  xs: "1.7rem",
+                  md: "clamp(2.1rem, 3.5vw, 3.2rem)",
+                },
+                fontWeight: 600,
+                letterSpacing: "-0.045em",
+                lineHeight: 1.3,
+                mb: 5,
+                maxWidth: 800,
+              }}
+            >
+              I approach software much as I approached architecture: by looking
+              at the whole system while paying attention to the details that
+              shape the experience.
+            </Typography>
 
-          <Typography component="p" sx={{ fontSize: "inherit" }}>
-            I believe in clean work, continuous learning, and creating solutions
-            that don't just look good, but work well. When I'm away from the
-            screen, you'll probably find me running, hiking, or simply looking
-            at the world as if it were a wireframe.
-          </Typography>
+            <Stack
+              spacing={3}
+              sx={{
+                maxWidth: 740,
+                "& p": {
+                  fontSize: { xs: 16, md: 18 },
+                  lineHeight: 1.9,
+                  color: colors.muted,
+                  m: 0,
+                },
+              }}
+            >
+              <Typography component="p">
+                Before moving into software development, I spent more than a
+                decade working in architecture and urban planning. That
+                experience taught me to navigate complex requirements, think
+                spatially and systematically, and turn abstract ideas into
+                coherent, workable solutions.
+              </Typography>
+
+              <Typography component="p">
+                What drew me to programming was the opportunity to apply that
+                same way of thinking in a different medium. I enjoy
+                understanding how things fit together, solving the problems
+                beneath the surface, and creating interfaces that feel as
+                considered as the systems behind them.
+              </Typography>
+
+              <Typography component="p">
+                I studied Full-Stack Development at HackerU and have since been
+                building projects with React, JavaScript, Node.js, Python, and
+                Django, exploring both front-end experiences and the
+                architecture that supports them.
+              </Typography>
+
+              <Typography component="p">
+                I'm particularly interested in work where thoughtful design and
+                solid engineering strengthen one another. I bring curiosity,
+                visual sensitivity, and an appreciation for structure to
+                everything I build.
+              </Typography>
+            </Stack>
+          </Box>
+        </Box>
+
+        {/* DIVIDER */}
+        <Box
+          sx={{
+            height: "1px",
+            bgcolor: "rgba(108,91,123,0.18)",
+            mt: { xs: 9, md: 13 },
+            mb: { xs: 6, md: 8 },
+          }}
+        />
+
+        {/* BACKGROUND / FOCUS */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+            gap: { xs: 5, md: 10 },
+          }}
+        >
+          <Box>
+            <Typography
+              sx={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                color: colors.rose,
+                mb: 2,
+              }}
+            >
+              BACKGROUND
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: 23, md: 30 },
+                fontWeight: 600,
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Architecture & Urban Planning
+            </Typography>
+          </Box>
+
+          <Box>
+            <Typography
+              sx={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                color: colors.rose,
+                mb: 2,
+              }}
+            >
+              CURRENT FOCUS
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: 23, md: 30 },
+                fontWeight: 600,
+                letterSpacing: "-0.04em",
+              }}
+            >
+              Full-Stack Development
+            </Typography>
+          </Box>
         </Box>
       </Container>
     </Box>
