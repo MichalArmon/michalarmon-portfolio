@@ -233,7 +233,7 @@ function Projects() {
                   position: "relative",
                   mb: {
                     xs: isLast ? 0 : 6,
-                    md: 20,
+                    md: isLast ? 0 : 12,
                   },
                   scrollMarginTop: "100px",
                 }}
