@@ -54,14 +54,26 @@ const apiProjects = [
     image: "",
     link: "",
   },
+
   {
     id: "api-2",
-    title: "Django Articles",
-    description: "A full-stack article management platform.",
-    technologies: ["React", "Django", "Python"],
-    image: "",
-    link: "",
+    title: "Article Hub — Full-Stack Publishing Platform",
+    description:
+      "A full-stack editorial platform featuring article management, user roles, favorites, comments, and interactive machine learning tools for predicting article views.",
+    technologies: [
+      "React",
+      "MUI",
+      "Python",
+      "Django REST",
+      "PostgreSQL",
+      "JWT",
+      "Scikit-learn",
+      "Motion",
+    ],
+    image: "/img/api/article-hub.png",
+    link: "https://article-hub-qa2w.onrender.com/",
   },
+
   {
     id: "api-3",
     title: "ClassFlow — Education Management",
