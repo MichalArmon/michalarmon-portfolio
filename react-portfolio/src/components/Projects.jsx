@@ -54,7 +54,6 @@ const apiProjects = [
     image: "/img/api/ban-tao.png",
     link: "https://ban-tao-resort.netlify.app/resort",
   },
-
   {
     id: "api-2",
     title: "Article Hub — Full-Stack Publishing Platform",
@@ -73,7 +72,6 @@ const apiProjects = [
     image: "/img/api/article-hub.png",
     link: "https://article-hub-qa2w.onrender.com/",
   },
-
   {
     id: "api-3",
     title: "ClassFlow — Education Management",
@@ -153,13 +151,15 @@ function Projects() {
       sx={{
         bgcolor: "background.default",
         color: "text.primary",
-        py: { xs: 10, md: 16 },
+        pt: { xs: 6, md: 16 },
+        pb: { xs: 0, md: 16 },
         overflow: "hidden",
+        scrollMarginTop: { xs: "72px", md: "88px" },
       }}
     >
       <Container maxWidth="lg">
         {/* MAIN HEADING */}
-        <Box sx={{ mb: { xs: 10, md: 16 } }}>
+        <Box sx={{ mb: { xs: 7, md: 16 } }}>
           <MotionTypography
             {...reveal(0, 20)}
             sx={{
@@ -196,7 +196,7 @@ function Projects() {
                   color: "#C06C84",
                   fontStyle: "italic",
                   fontWeight: 400,
-                  fontFamily: "DM Sans', sans-serif",
+                  fontFamily: "'DM Sans', sans-serif",
                 }}
               >
                 Projects.
@@ -222,131 +222,139 @@ function Projects() {
         {/* CATEGORIES */}
         {categories
           .filter((category) => category.projects.length > 0)
-          .map((category) => (
-            <Box
-              key={category.id}
-              id={category.id}
-              sx={{
-                position: "relative",
-                mb: { xs: 12, md: 20 },
-                scrollMarginTop: "100px",
-              }}
-            >
-              {/* CATEGORY HEADER */}
+          .map((category, index, filteredCategories) => {
+            const isLast = index === filteredCategories.length - 1;
+
+            return (
               <Box
+                key={category.id}
+                id={category.id}
                 sx={{
                   position: "relative",
-                  mb: { xs: 5, md: 8 },
+                  mb: {
+                    xs: isLast ? 0 : 6,
+                    md: 20,
+                  },
+                  scrollMarginTop: "100px",
                 }}
               >
-                {/* LARGE DECORATIVE NUMBER */}
-                <MotionTypography
-                  aria-hidden="true"
-                  {...reveal(0, 20)}
+                {/* CATEGORY HEADER */}
+                <Box
                   sx={{
-                    position: "absolute",
-                    right: { xs: 0, md: 20 },
-                    top: { xs: -30, md: -75 },
-                    fontSize: {
-                      xs: 105,
-                      md: 190,
-                    },
-                    fontWeight: 800,
-                    lineHeight: 1,
-                    letterSpacing: "-0.09em",
-                    color: "#C06C84",
-                    opacity: 0.1,
-                    pointerEvents: "none",
-                    userSelect: "none",
-                  }}
-                >
-                  {category.number}
-                </MotionTypography>
-
-                {/* EYEBROW */}
-                <MotionTypography
-                  {...reveal(0.05)}
-                  sx={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: "0.22em",
-                    color: "secondary.main",
-                    mb: 2,
                     position: "relative",
+                    mb: { xs: 4, md: 8 },
                   }}
                 >
-                  {category.number} / SELECTED WORK
-                </MotionTypography>
-
-                {/* CATEGORY TITLE */}
-                <Box sx={{ overflow: "hidden", pb: 2 }}>
+                  {/* DECORATIVE NUMBER */}
                   <MotionTypography
-                    component="h3"
-                    {...reveal(0.12, 55)}
+                    aria-hidden="true"
+                    {...reveal(0, 20)}
                     sx={{
-                      fontSize: {
-                        xs: "clamp(2.3rem, 7vw, 3.5rem)",
-                        md: "clamp(3.2rem, 5vw, 5rem)",
-                      },
-                      fontWeight: 700,
-                      letterSpacing: "-0.055em",
-                      lineHeight: 1.08,
-                      position: "relative",
-                      m: 0,
+                      position: "absolute",
+                      right: { xs: 0, md: 20 },
+                      top: { xs: -30, md: -75 },
+                      fontSize: { xs: 105, md: 190 },
+                      fontWeight: 800,
+                      lineHeight: 1,
+                      letterSpacing: "-0.09em",
+                      color: "#C06C84",
+                      opacity: 0.1,
+                      pointerEvents: "none",
+                      userSelect: "none",
                     }}
                   >
-                    {category.title}
+                    {category.number}
+                  </MotionTypography>
+
+                  {/* EYEBROW */}
+                  <MotionTypography
+                    {...reveal(0.05)}
+                    sx={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      letterSpacing: "0.22em",
+                      color: "secondary.main",
+                      mb: 2,
+                      position: "relative",
+                    }}
+                  >
+                    {category.number} / SELECTED WORK
+                  </MotionTypography>
+
+                  {/* CATEGORY TITLE */}
+                  <Box sx={{ overflow: "hidden", pb: 2 }}>
+                    <MotionTypography
+                      component="h3"
+                      {...reveal(0.12, 55)}
+                      sx={{
+                        fontSize: {
+                          xs: "clamp(2.3rem, 7vw, 3.5rem)",
+                          md: "clamp(3.2rem, 5vw, 5rem)",
+                        },
+                        fontWeight: 700,
+                        letterSpacing: "-0.055em",
+                        lineHeight: 1.08,
+                        position: "relative",
+                        m: 0,
+                      }}
+                    >
+                      {category.title}
+                    </MotionTypography>
+                  </Box>
+
+                  {/* CATEGORY DESCRIPTION */}
+                  <MotionTypography
+                    {...reveal(0.22)}
+                    sx={{
+                      fontSize: { xs: 15, md: 17 },
+                      lineHeight: 1.85,
+                      color: "text.secondary",
+                      maxWidth: 620,
+                      mt: 2,
+                      position: "relative",
+                    }}
+                  >
+                    {category.description}
                   </MotionTypography>
                 </Box>
 
-                {/* CATEGORY DESCRIPTION */}
-                <MotionTypography
-                  {...reveal(0.22)}
-                  sx={{
-                    fontSize: { xs: 15, md: 17 },
-                    lineHeight: 1.85,
-                    color: "text.secondary",
-                    maxWidth: 620,
-                    mt: 2,
-                    position: "relative",
+                {/* PROJECT GRID */}
+                <Grid container spacing={{ xs: 5, md: 5 }} alignItems="stretch">
+                  {category.projects.map((project) => (
+                    <Grid
+                      key={project.id}
+                      size={{ xs: 12, md: 6 }}
+                      sx={{ display: "flex" }}
+                    >
+                      <ProjectCard project={project} />
+                    </Grid>
+                  ))}
+                </Grid>
+
+                {/* ANIMATED DIVIDER */}
+                <MotionBox
+                  initial={reduceMotion ? false : { scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
-                >
-                  {category.description}
-                </MotionTypography>
+                  sx={{
+                    display: {
+                      xs: isLast ? "none" : "block",
+                      md: "block",
+                    },
+                    mt: { xs: 5, md: 14 },
+                    height: "1px",
+                    width: "100%",
+                    bgcolor: "divider",
+                    transformOrigin: "left",
+                  }}
+                />
               </Box>
-
-              {/* PROJECT GRID */}
-              <Grid container spacing={{ xs: 5, md: 5 }} alignItems="stretch">
-                {category.projects.map((project) => (
-                  <Grid
-                    key={project.id}
-                    size={{ xs: 12, md: 6 }}
-                    sx={{ display: "flex" }}
-                  >
-                    <ProjectCard project={project} />
-                  </Grid>
-                ))}
-              </Grid>
-
-              {/* ANIMATED DIVIDER */}
-              <MotionBox
-                initial={reduceMotion ? false : { scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 1,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                sx={{
-                  mt: { xs: 10, md: 14 },
-                  height: "1px",
-                  width: "100%",
-                  bgcolor: "divider",
-                  transformOrigin: "left",
-                }}
-              />
-            </Box>
-          ))}
+            );
+          })}
       </Container>
     </Box>
   );
