@@ -1,8 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { Box, Typography, Button, useMediaQuery } from "@mui/material";
 
 function LogoAnimation({ onEnter }) {
+  const isMobile = useMediaQuery("(max-width:899px)");
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    // Automatically enter after the animation
+    const timer = setTimeout(onEnter, 2800);
+
+    return () => clearTimeout(timer);
+  }, [isMobile, onEnter]);
+
   return (
     <Box
+      onWheel={isMobile ? onEnter : undefined}
+      onTouchMove={isMobile ? onEnter : undefined}
       sx={{
         position: "fixed",
         inset: 0,
@@ -42,6 +56,7 @@ function LogoAnimation({ onEnter }) {
       }}
     >
       <Box
+        onClick={onEnter}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -49,7 +64,6 @@ function LogoAnimation({ onEnter }) {
           fontFamily: "inherit",
           cursor: "pointer",
         }}
-        onClick={onEnter}
       >
         <Box
           component="span"
@@ -78,7 +92,7 @@ function LogoAnimation({ onEnter }) {
             fontWeight: 200,
             opacity: 0,
             animation: "fadeIn 1s ease forwards",
-            marginTop: 1,
+            mt: 1,
           }}
         >
           ichal
@@ -86,25 +100,40 @@ function LogoAnimation({ onEnter }) {
       </Box>
 
       <Typography
-        component="button"
-        onClick={onEnter}
         sx={{
           mt: -2.5,
-          background: "none",
-          border: "none",
           color: "#ccc",
           fontSize: { xs: "1rem", md: "1.5rem" },
           fontFamily: "Arial, sans-serif",
-          cursor: "pointer",
           opacity: 0,
           animation: "fadeIn 1s ease 2s forwards",
-          "&:hover": {
-            color: "white",
-          },
         }}
       >
         ARCHITECT &gt; DEVELOPER
       </Typography>
+
+      <Button
+        onClick={onEnter}
+        sx={{
+          position: "absolute",
+          bottom: { xs: "12%", md: "10%" },
+          color: "white",
+          fontFamily: "'Courier New', monospace",
+          fontSize: { xs: "0.9rem", md: "1rem" },
+          letterSpacing: 3,
+          opacity: 0,
+          animation: "fadeIn 0.8s ease 2s forwards",
+          borderBottom: "1px solid rgba(255,255,255,0.5)",
+          borderRadius: 0,
+          px: 2,
+          "&:hover": {
+            backgroundColor: "transparent",
+            borderColor: "white",
+          },
+        }}
+      >
+        ENTER SITE ↓
+      </Button>
     </Box>
   );
 }

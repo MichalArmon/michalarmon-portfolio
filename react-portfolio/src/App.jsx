@@ -5,11 +5,23 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import StackedSection from "./components/StackedSection";
 import LogoAnimation from "./components/LogoAnimation";
-import { useState } from "react";
-import Landing01 from "./landingPages/landing01/Landing01";
+import { useState, useLayoutEffect } from "react";
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
+
+  useLayoutEffect(() => {
+    if (!showIntro) {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, [showIntro]);
+
+  const handleEnter = () => {
+    window.scrollTo(0, 0);
+    setShowIntro(false);
+  };
 
   return (
     <>
@@ -31,7 +43,7 @@ function App() {
         <Contact />
       </StackedSection>
 
-      {showIntro && <LogoAnimation onEnter={() => setShowIntro(false)} />}
+      {showIntro && <LogoAnimation onEnter={handleEnter} />}
     </>
   );
 }
