@@ -18,7 +18,7 @@ const landingPages = [
       "A colorful promotional landing page featuring an animated gradient.",
     technologies: ["HTML", "CSS", "Animations"],
     image: "",
-    link: "",
+    link: "/landing-pages/landing02",
   },
   {
     id: "landing-3",
@@ -27,7 +27,7 @@ const landingPages = [
       "A responsive coffee promotion page featuring a split-screen layout.",
     technologies: ["HTML", "CSS", "Animations"],
     image: "",
-    link: "",
+    link: "/landing-pages/landing03",
   },
   {
     id: "landing-4",
@@ -36,7 +36,7 @@ const landingPages = [
       "A modern business landing page with a striking visual identity.",
     technologies: ["HTML", "CSS", "Responsive Design"],
     image: "",
-    link: "",
+    link: "/landing-pages/landing04",
   },
   {
     id: "landing-5",
