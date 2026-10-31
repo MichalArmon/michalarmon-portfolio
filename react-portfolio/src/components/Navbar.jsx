@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -55,6 +55,19 @@ const navButtonStyles = {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNavigation = (href) => {
     setOpen(false);
@@ -72,17 +85,24 @@ function Navbar() {
   return (
     <>
       <AppBar
-        position="absolute"
+        position="fixed"
         elevation={0}
         sx={{
-          bgcolor: "transparent",
-          boxShadow: "none",
-          zIndex: 1100,
-          mt: 2,
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1200,
+
+          bgcolor: scrolled ? "rgba(53, 92, 125, 0.96)" : "transparent",
+
+          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.12)" : "none",
+
+          transition: "background-color 0.3s ease, box-shadow 0.3s ease",
         }}
       >
         <Toolbar
           sx={{
+            minHeight: { xs: 72, md: 88 },
             justifyContent: "space-between",
             px: { xs: 2, md: 4 },
           }}
@@ -137,6 +157,7 @@ function Navbar() {
               display: { xs: "flex", md: "none" },
               color: "#FFFFFF",
               bgcolor: "rgba(255,255,255,0.08)",
+
               "&:hover": {
                 bgcolor: "rgba(255,255,255,0.15)",
               },
@@ -157,6 +178,7 @@ function Navbar() {
         }}
         sx={{
           zIndex: 1500,
+
           "& .MuiDrawer-paper": {
             width: { xs: "85vw", sm: 340 },
             maxWidth: 360,
