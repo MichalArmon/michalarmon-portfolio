@@ -4,10 +4,13 @@ import {
   Chip,
   Stack,
   Card,
+  IconButton,
+  Tooltip,
   useMediaQuery,
 } from "@mui/material";
 
 import NorthEastIcon from "@mui/icons-material/NorthEast";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import ImageNotSupportedOutlinedIcon from "@mui/icons-material/ImageNotSupportedOutlined";
 
 import { Link as RouterLink } from "react-router-dom";
@@ -39,15 +42,92 @@ function ProjectCard({ project }) {
           rel: "noopener noreferrer",
         };
 
+  const imageContent = (
+    <Box
+      sx={{
+        width: "100%",
+        aspectRatio: {
+          xs: "4 / 3",
+          sm: "16 / 10",
+        },
+        position: "relative",
+        overflow: "hidden",
+        bgcolor: "#F4F0F5",
+        borderRadius: {
+          xs: "12px",
+          sm: "14px",
+        },
+      }}
+    >
+      {project.image ? (
+        <Box
+          component="img"
+          className="project-image"
+          src={project.image}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          sx={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transition: disableAnimations ? "none" : "transform 0.5s ease",
+          }}
+        />
+      ) : (
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#B6A8BF",
+            background:
+              "linear-gradient(135deg, #F8B19533, #C06C8433, #6C5B7B33)",
+          }}
+        >
+          <ImageNotSupportedOutlinedIcon
+            sx={{ fontSize: { xs: 34, md: 42 } }}
+          />
+        </Box>
+      )}
+
+      {/* IMAGE ARROW */}
+      {project.link && (
+        <Box
+          className="project-arrow"
+          sx={{
+            position: "absolute",
+            top: { xs: 12, sm: 16 },
+            right: { xs: 12, sm: 16 },
+            width: { xs: 40, sm: 44 },
+            height: { xs: 40, sm: 44 },
+            borderRadius: "50%",
+            bgcolor: "rgba(255,255,255,0.96)",
+            color: "#383043",
+            boxShadow: "0 4px 18px rgba(30,25,40,.10)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+            transition: disableAnimations
+              ? "none"
+              : "background-color .3s ease, color .3s ease",
+          }}
+        >
+          <NorthEastIcon sx={{ fontSize: { xs: 19, sm: 21 } }} />
+        </Box>
+      )}
+    </Box>
+  );
+
   return (
     <MotionCard
-      {...linkProps}
       initial={disableAnimations ? false : { opacity: 0, y: 35 }}
       whileInView={disableAnimations ? undefined : { opacity: 1, y: 0 }}
-      viewport={{
-        once: true,
-        amount: 0.15,
-      }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
         duration: 0.5,
         ease: "easeOut",
@@ -58,162 +138,60 @@ function ProjectCard({ project }) {
         width: "100%",
         minWidth: 0,
         height: "100%",
-
         display: "flex",
         flexDirection: "column",
-
         bgcolor: "transparent",
         color: "#292532",
-
         borderRadius: 0,
         border: "none",
         boxShadow: "none",
-        textDecoration: "none",
-
         overflow: "visible",
         position: "relative",
 
-        cursor: project.link ? "pointer" : "default",
-
         "@media (hover: hover) and (pointer: fine)": {
-          "&:hover .project-image": {
+          "& .project-image-link:hover .project-image": {
             transform: disableAnimations ? "none" : "scale(1.035)",
           },
 
-          "&:hover .project-arrow": {
+          "& .project-image-link:hover .project-arrow": {
             bgcolor: "#F67280",
             color: "#FFFFFF",
-            transform: disableAnimations ? "none" : "translate(3px, -3px)",
           },
-
-          "&:hover .project-title": {
-            color: "#C06C84",
-          },
-        },
-
-        "&:focus-visible": {
-          outline: "2px solid #F67280",
-          outlineOffset: 5,
         },
       }}
     >
-      {/* PROJECT IMAGE */}
-      <Box
-        sx={{
-          width: "100%",
-          minWidth: 0,
+      {/* PROJECT IMAGE LINK */}
+      {project.link ? (
+        <Box
+          {...linkProps}
+          className="project-image-link"
+          aria-label={`View ${project.title}`}
+          sx={{
+            width: "100%",
+            display: "block",
+            textDecoration: "none",
+            borderRadius: "14px",
 
-          aspectRatio: {
-            xs: "4 / 3",
-            sm: "16 / 10",
-          },
+            "&:focus-visible": {
+              outline: "2px solid #F67280",
+              outlineOffset: 4,
+            },
+          }}
+        >
+          {imageContent}
+        </Box>
+      ) : (
+        imageContent
+      )}
 
-          overflow: "hidden",
-          position: "relative",
-
-          bgcolor: "#F4F0F5",
-
-          borderRadius: {
-            xs: "12px",
-            sm: "14px",
-          },
-
-          flexShrink: 0,
-        }}
-      >
-        {project.image ? (
-          <Box
-            component="img"
-            className="project-image"
-            src={project.image}
-            alt={project.title}
-            loading="lazy"
-            decoding="async"
-            sx={{
-              display: "block",
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-
-              transition: disableAnimations ? "none" : "transform 0.5s ease",
-            }}
-          />
-        ) : (
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-
-              color: "#B6A8BF",
-
-              background:
-                "linear-gradient(135deg, #F8B19533, #C06C8433, #6C5B7B33)",
-            }}
-          >
-            <ImageNotSupportedOutlinedIcon
-              sx={{
-                fontSize: { xs: 34, md: 42 },
-              }}
-            />
-          </Box>
-        )}
-
-        {/* FLOATING ARROW */}
-        {project.link && (
-          <Box
-            className="project-arrow"
-            sx={{
-              position: "absolute",
-
-              top: { xs: 12, sm: 16 },
-              right: { xs: 12, sm: 16 },
-
-              width: { xs: 40, sm: 44 },
-              height: { xs: 40, sm: 44 },
-
-              borderRadius: "50%",
-
-              bgcolor: "rgba(255,255,255,0.96)",
-              color: "#383043",
-
-              boxShadow: "0 4px 18px rgba(30,25,40,.10)",
-
-              backdropFilter: isMobile ? "none" : "blur(10px)",
-
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-
-              pointerEvents: "none",
-
-              transition: disableAnimations
-                ? "none"
-                : "background-color .3s ease, color .3s ease, transform .3s ease",
-            }}
-          >
-            <NorthEastIcon
-              sx={{
-                fontSize: { xs: 19, sm: 21 },
-              }}
-            />
-          </Box>
-        )}
-      </Box>
-
-      {/* CONTENT */}
+      {/* PROJECT CONTENT */}
       <Box
         sx={{
           pt: { xs: 2.5, md: 3 },
           pb: { xs: 1.5, md: 2 },
           px: { xs: 0.25, md: 0.5 },
-
           minWidth: 0,
           flexGrow: 1,
-
           display: "flex",
           flexDirection: "column",
         }}
@@ -221,19 +199,18 @@ function ProjectCard({ project }) {
         {/* CATEGORY */}
         <Typography
           sx={{
-            fontSize: { xs: 10, md: 10 },
+            fontSize: 10,
             fontWeight: 700,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
             color: "#B07891",
-
             mb: { xs: 1.2, md: 1.5 },
           }}
         >
           {project.category || "SELECTED WORK"}
         </Typography>
 
-        {/* PROJECT TITLE */}
+        {/* TITLE */}
         <Typography
           component="h3"
           className="project-title"
@@ -243,18 +220,12 @@ function ProjectCard({ project }) {
               sm: 25,
               md: 27,
             },
-
             fontWeight: 700,
             lineHeight: 1.25,
             letterSpacing: "-0.035em",
-
-            mb: { xs: 1.5, md: 1.5 },
-
+            mb: 1.5,
             color: "#292532",
-
             overflowWrap: "break-word",
-
-            transition: disableAnimations ? "none" : "color 0.3s ease",
           }}
         >
           {project.title}
@@ -264,21 +235,10 @@ function ProjectCard({ project }) {
         <Typography
           sx={{
             color: "#77727D",
-
-            fontSize: {
-              xs: 13.5,
-              sm: 14,
-            },
-
-            lineHeight: {
-              xs: 1.8,
-              md: 1.8,
-            },
-
-            mb: { xs: 2.5, md: 3 },
-
+            fontSize: { xs: 13.5, sm: 14 },
+            lineHeight: 1.8,
+            mb: 3,
             flexGrow: 1,
-
             overflowWrap: "break-word",
           }}
         >
@@ -304,24 +264,16 @@ function ProjectCard({ project }) {
                 size="small"
                 sx={{
                   height: { xs: 26, sm: 28 },
-
                   maxWidth: "100%",
-                  minWidth: 0,
-
                   borderRadius: "6px",
-
                   bgcolor: "#F6F0F5",
                   border: "1px solid #EEE5EF",
-
                   color: "#76677D",
-
                   fontSize: { xs: 10, sm: 11 },
                   fontWeight: 500,
 
                   "& .MuiChip-label": {
                     px: { xs: 1, sm: 1.3 },
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
                   },
                 }}
               />
@@ -329,46 +281,110 @@ function ProjectCard({ project }) {
           </Stack>
         )}
 
-        {/* PROJECT LINK */}
+        {/* BOTTOM LINKS */}
         <Box
           sx={{
             mt: "auto",
-            pt: { xs: 1.75, md: 2 },
-
+            pt: 1.5,
             borderTop: "1px solid #EEE9EF",
-
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-
             gap: 2,
             minWidth: 0,
           }}
         >
-          <Typography
-            sx={{
-              fontSize: { xs: 10, sm: 11 },
-              fontWeight: 700,
-
-              letterSpacing: {
-                xs: "0.1em",
-                sm: "0.12em",
-              },
-
-              color: "#C06C84",
-            }}
-          >
-            {project.link ? "EXPLORE PROJECT" : "PROJECT PREVIEW"}
-          </Typography>
-
-          {project.link && (
-            <NorthEastIcon
+          {/* LIVE PROJECT */}
+          {project.link ? (
+            <Box
+              {...linkProps}
               sx={{
-                fontSize: { xs: 17, sm: 18 },
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 1,
+                minHeight: 44,
+                minWidth: 0,
+                textDecoration: "none",
                 color: "#C06C84",
-                flexShrink: 0,
+                transition: "color 0.2s ease",
+
+                "&:hover": {
+                  color: "#292532",
+                },
+
+                "&:focus-visible": {
+                  outline: "2px solid #F67280",
+                  outlineOffset: 3,
+                },
               }}
-            />
+            >
+              <Typography
+                sx={{
+                  fontSize: { xs: 10, sm: 11 },
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                }}
+              >
+                EXPLORE PROJECT
+              </Typography>
+
+              <NorthEastIcon
+                sx={{
+                  fontSize: 17,
+                  flexShrink: 0,
+                }}
+              />
+            </Box>
+          ) : (
+            <Typography
+              sx={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                color: "#C06C84",
+              }}
+            >
+              PROJECT PREVIEW
+            </Typography>
+          )}
+
+          {/* GITHUB */}
+          {project.github && (
+            <Tooltip title="View Source Code" arrow>
+              <IconButton
+                component="a"
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View ${project.title} on GitHub`}
+                sx={{
+                  width: 44,
+                  height: 44,
+                  flexShrink: 0,
+                  borderRadius: "12px",
+                  bgcolor: "#F6F0F5",
+                  border: "1px solid #EEE5EF",
+                  color: "#292532",
+                  transition:
+                    "background-color 0.2s ease, color 0.2s ease, transform 0.2s ease",
+
+                  "@media (hover: hover) and (pointer: fine)": {
+                    "&:hover": {
+                      bgcolor: "#C06C84",
+                      color: "#FFFFFF",
+                      transform: "translateY(-2px)",
+                    },
+                  },
+
+                  "&:focus-visible": {
+                    outline: "2px solid #F67280",
+                    outlineOffset: 3,
+                  },
+                }}
+              >
+                <GitHubIcon sx={{ fontSize: 23 }} />
+              </IconButton>
+            </Tooltip>
           )}
         </Box>
       </Box>
