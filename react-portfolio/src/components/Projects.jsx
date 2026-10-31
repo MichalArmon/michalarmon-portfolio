@@ -16,6 +16,7 @@ const landingPages = [
     technologies: ["React", "MUI", "CSS Animations"],
     image: "/img/landing-pages/landing01.png",
     link: "/landing-pages/landing01",
+    github: "https://github.com/michalarmon/michalarmon-portfolio",
   },
   {
     id: "landing-2",
@@ -25,6 +26,7 @@ const landingPages = [
     technologies: ["React", "MUI", "Motion"],
     image: "/img/landing-pages/landing02.png",
     link: "/landing-pages/landing02",
+    github: "https://github.com/michalarmon/michalarmon-portfolio",
   },
   {
     id: "landing-3",
@@ -34,6 +36,7 @@ const landingPages = [
     technologies: ["React", "Three.js", "React Three Fiber", "Drei", "Motion"],
     image: "/img/landing-pages/landing03.png",
     link: "/landing-pages/landing03",
+    github: "https://github.com/michalarmon/michalarmon-portfolio",
   },
   {
     id: "landing-4",
@@ -43,6 +46,7 @@ const landingPages = [
     technologies: ["React", "MUI", "Motion", "RTL"],
     image: "/img/landing-pages/landing04.png",
     link: "/landing-pages/landing04",
+    github: "https://github.com/michalarmon/michalarmon-portfolio",
   },
 ];
 
@@ -54,6 +58,7 @@ const apiProjects = [
     technologies: ["React", "MUI", "Node.js", "MongoDB"],
     image: "/img/api/ban-tao.png",
     link: "https://ban-tao-resort.netlify.app/resort",
+    github: "https://github.com/MichalArmon/ban-tao2026",
   },
   {
     id: "api-2",
@@ -72,6 +77,8 @@ const apiProjects = [
     ],
     image: "/img/api/article-hub.png",
     link: "https://article-hub-qa2w.onrender.com/",
+    // TODO: Replace with the Article Hub repository URL.
+    github: "https://github.com/MichalArmon",
   },
   {
     id: "api-3",
@@ -89,6 +96,8 @@ const apiProjects = [
     ],
     image: "/img/api/class-flow.png",
     link: "https://classflow-project.netlify.app",
+    // TODO: Replace with the ClassFlow repository URL.
+    github: "https://github.com/MichalArmon",
   },
 ];
 
@@ -101,6 +110,7 @@ const showcaseProjects = [
     technologies: ["React", "Vite", "Web Design", "Architecture"],
     image: "/img/showcase/AMMS.png",
     link: "https://amms.co.il",
+    github: "https://github.com/MichalArmon/amms-website",
   },
 ];
 
@@ -135,7 +145,6 @@ function Projects() {
   const reduceMotion = useReducedMotion();
   const isMobile = useMediaQuery("(max-width:899px)");
 
-  // Disable reveal animations on mobile to keep titles visible.
   const disableAnimations = reduceMotion || isMobile;
 
   const reveal = (delay = 0, y = 35) => ({
@@ -207,7 +216,6 @@ function Projects() {
                 letterSpacing: "-0.075em",
                 m: 0,
 
-                // Keep text visible even if mobile motion is unavailable.
                 ...(disableAnimations && {
                   opacity: 1,
                   transform: "none",
