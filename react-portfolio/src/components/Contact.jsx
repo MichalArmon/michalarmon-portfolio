@@ -6,7 +6,6 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Alert,
   Stack,
 } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -16,10 +15,15 @@ const colors = {
   ink: "#FFFFFF",
   muted: "rgba(255,255,255,0.75)",
   rose: "#F8B195",
-  purple: "#F8B195",
   blue: "#FFFFFF",
-  pale: "#355C7D",
 };
+
+const links = [
+  { label: "Home", href: "#home" },
+  { label: "Projects", href: "#projects" },
+  { label: "About", href: "#aboutMe" },
+  { label: "Contact", href: "#contact" },
+];
 
 const labelStyles = {
   color: colors.ink,
@@ -28,6 +32,7 @@ const labelStyles = {
   letterSpacing: "0.14em",
   textTransform: "uppercase",
   mb: 1.5,
+
   "&.Mui-focused": {
     color: colors.rose,
   },
@@ -46,17 +51,17 @@ const inputStyles = {
   transition: "border-color 0.25s ease",
 
   "&:hover": {
-    borderColor: "#F8B195",
+    borderColor: colors.rose,
   },
 
-  "&.Mui-focused, &:focus-within": {
-    borderBottom: "1px solid #F8B195",
+  "&:focus-within": {
+    borderBottom: `1px solid ${colors.rose}`,
   },
 
   "& input, & textarea": {
     color: "#FFFFFF",
     WebkitTextFillColor: "#FFFFFF",
-    caretColor: "#F8B195",
+    caretColor: colors.rose,
   },
 
   "& input::placeholder, & textarea::placeholder": {
@@ -85,7 +90,7 @@ function Contact() {
         overflow: "hidden",
         scrollMarginTop: { xs: "72px", md: "88px" },
         pt: { xs: 9, md: 16 },
-        pb: { xs: 12, md: 20 },
+        pb: { xs: 5, md: 6 },
       }}
     >
       <Container maxWidth="lg" sx={{ px: { xs: 3, md: 4 } }}>
@@ -242,6 +247,7 @@ function Contact() {
                     fontSize: 14,
                     fontWeight: 700,
                     borderBottom: `1px solid ${colors.blue}`,
+
                     "&:hover": {
                       bgcolor: "transparent",
                       color: colors.rose,
@@ -267,9 +273,7 @@ function Contact() {
                       autoComplete="name"
                       placeholder="Your name"
                       sx={inputStyles}
-                      inputProps={{
-                        "aria-label": "Name",
-                      }}
+                      inputProps={{ "aria-label": "Name" }}
                     />
                   </FormControl>
 
@@ -287,9 +291,7 @@ function Contact() {
                       autoComplete="email"
                       placeholder="you@example.com"
                       sx={inputStyles}
-                      inputProps={{
-                        "aria-label": "Email",
-                      }}
+                      inputProps={{ "aria-label": "Email" }}
                     />
 
                     <ValidationError
@@ -313,9 +315,7 @@ function Contact() {
                       minRows={4}
                       placeholder="Tell me a little about what you have in mind..."
                       sx={inputStyles}
-                      inputProps={{
-                        "aria-label": "Message",
-                      }}
+                      inputProps={{ "aria-label": "Message" }}
                     />
 
                     <ValidationError
@@ -326,9 +326,7 @@ function Contact() {
                   </FormControl>
 
                   {/* FORM ERRORS */}
-                  {state.errors && !state.succeeded && (
-                    <ValidationError errors={state.errors} />
-                  )}
+                  <ValidationError errors={state.errors} />
 
                   {/* SUBMIT */}
                   <Box sx={{ pt: 2 }}>
@@ -347,11 +345,13 @@ function Contact() {
                         letterSpacing: "-0.01em",
                         borderBottom: `1px solid ${colors.blue}`,
                         transition: "color 0.25s ease, border-color 0.25s ease",
+
                         "&:hover": {
                           bgcolor: "transparent",
                           color: colors.rose,
                           borderColor: colors.rose,
                         },
+
                         "&.Mui-disabled": {
                           color: colors.muted,
                         },
@@ -366,37 +366,95 @@ function Contact() {
           </Box>
         </Box>
 
-        {/* BOTTOM LINE */}
+        {/* FOOTER */}
         <Box
+          component="footer"
           sx={{
-            mt: { xs: 12, md: 18 },
+            mt: { xs: 10, md: 16 },
             pt: 4,
             borderTop: "1px solid rgba(255,255,255,0.2)",
-            display: "flex",
-            justifyContent: "space-between",
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              md: "1fr auto 1fr",
+            },
             alignItems: "center",
-            gap: 3,
-            flexWrap: "wrap",
+            gap: { xs: 4, md: 5 },
           }}
         >
+          {/* COPYRIGHT */}
           <Typography
             sx={{
               color: colors.muted,
-              fontSize: 12,
-              letterSpacing: "0.04em",
+              fontSize: 13,
+              textAlign: { xs: "center", md: "left" },
+              order: { xs: 3, md: 1 },
+              whiteSpace: "nowrap",
             }}
           >
-            MICHAL ARMON / PORTFOLIO
+            © {new Date().getFullYear()} Michal Armon
           </Typography>
 
-          <Typography
+          {/* LOGO */}
+          <Box
+            component="a"
+            href="#home"
+            aria-label="Back to home"
             sx={{
-              color: colors.muted,
-              fontSize: 12,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none",
+              order: { xs: 1, md: 2 },
             }}
           >
-            Designed with intention. Built with care.
-          </Typography>
+            <Box
+              component="img"
+              src="/SVG/logo1_1.svg"
+              alt="Michal Armon"
+              sx={{
+                width: { xs: 130, md: 150 },
+                height: "auto",
+              }}
+            />
+          </Box>
+
+          {/* NAVIGATION */}
+          <Stack
+            direction="row"
+            spacing={{ xs: 2, md: 3 }}
+            useFlexGap
+            flexWrap="wrap"
+            sx={{
+              justifyContent: { xs: "center", md: "flex-end" },
+              order: { xs: 2, md: 3 },
+            }}
+          >
+            {links.map((link) => (
+              <Box
+                key={link.label}
+                component="a"
+                href={link.href}
+                sx={{
+                  color: colors.muted,
+                  fontSize: 13,
+                  textDecoration: "none",
+                  transition: "color 0.2s ease",
+
+                  "&:hover": {
+                    color: colors.rose,
+                  },
+
+                  "&:focus-visible": {
+                    outline: `2px solid ${colors.rose}`,
+                    outlineOffset: 4,
+                  },
+                }}
+              >
+                {link.label}
+              </Box>
+            ))}
+          </Stack>
         </Box>
       </Container>
     </Box>
