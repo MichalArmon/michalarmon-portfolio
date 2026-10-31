@@ -13,13 +13,12 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { useForm, ValidationError } from "@formspree/react";
 
 const colors = {
-  ink: "#292532",
-  muted: "#77727D",
-  rose: "#C06C84",
-  peach: "#F8B195",
-  purple: "#6C5B7B",
-  blue: "#355C7D",
-  pale: "#F8F6F8",
+  ink: "#FFFFFF",
+  muted: "rgba(255,255,255,0.75)",
+  rose: "#F8B195",
+  purple: "#F8B195",
+  blue: "#FFFFFF",
+  pale: "#355C7D",
 };
 
 const labelStyles = {
@@ -36,39 +35,39 @@ const labelStyles = {
 
 const inputStyles = {
   width: "100%",
-  color: colors.ink,
+  color: "#FFFFFF",
   fontSize: { xs: 16, md: 18 },
   fontWeight: 400,
   lineHeight: 1.6,
   px: 0,
   py: 1.7,
-  borderBottom: "1px solid rgba(108,91,123,0.3)",
+  borderBottom: "1px solid rgba(255,255,255,0.35)",
   borderRadius: 0,
   transition: "border-color 0.25s ease",
 
   "&:hover": {
-    borderColor: colors.purple,
+    borderColor: "#F8B195",
   },
 
   "&.Mui-focused, &:focus-within": {
-    borderBottom: `1px solid ${colors.rose}`,
+    borderBottom: "1px solid #F8B195",
   },
 
   "& input, & textarea": {
-    color: colors.ink,
-    WebkitTextFillColor: colors.ink,
-    caretColor: colors.rose,
+    color: "#FFFFFF",
+    WebkitTextFillColor: "#FFFFFF",
+    caretColor: "#F8B195",
   },
 
   "& input::placeholder, & textarea::placeholder": {
-    color: "#A49BA7",
+    color: "rgba(255,255,255,0.55)",
     opacity: 1,
   },
 
   "& input:-webkit-autofill": {
-    WebkitBoxShadow: `0 0 0 1000px ${colors.pale} inset`,
-    WebkitTextFillColor: `${colors.ink} !important`,
-    caretColor: colors.ink,
+    WebkitBoxShadow: "0 0 0 1000px #355C7D inset",
+    WebkitTextFillColor: "#FFFFFF !important",
+    caretColor: "#FFFFFF",
   },
 };
 
@@ -81,8 +80,8 @@ function Contact() {
       id="contact"
       sx={{
         position: "relative",
-        bgcolor: colors.pale,
-        color: colors.ink,
+        bgcolor: "#355C7D",
+        color: "#FFFFFF",
         overflow: "hidden",
         scrollMarginTop: { xs: "72px", md: "88px" },
         pt: { xs: 9, md: 16 },
@@ -372,7 +371,7 @@ function Contact() {
           sx={{
             mt: { xs: 12, md: 18 },
             pt: 4,
-            borderTop: "1px solid rgba(108,91,123,0.18)",
+            borderTop: "1px solid rgba(255,255,255,0.2)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
