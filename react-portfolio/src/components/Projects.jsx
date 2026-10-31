@@ -93,7 +93,17 @@ const apiProjects = [
   },
 ];
 
-const showcaseProjects = [];
+const showcaseProjects = [
+  {
+    id: "showcase-1",
+    title: "AMMS — Architecture Portfolio",
+    description:
+      "An architectural portfolio showcasing my work as an architect, from residential design to architectural projects and visualizations. A clean, visually driven website where architecture, space, and design take center stage.",
+    technologies: ["React", "Vite", "Web Design", "Architecture"],
+    image: "/img/showcase/AMMS.png",
+    link: "",
+  },
+];
 
 const categories = [
   {
