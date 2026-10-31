@@ -1,4 +1,10 @@
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 70px;
+  scroll-padding-top: 88px;
+}
+
+@media (max-width: 899px) {
+  html {
+    scroll-padding-top: 72px;
+  }
 }
