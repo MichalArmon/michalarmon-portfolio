@@ -8,7 +8,7 @@ function About() {
       sx={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        minHeight: { xs: "auto", md: "100vh" },
         bgcolor: "white",
         overflow: "hidden",
         scrollMarginTop: { xs: "72px", md: "88px" },
@@ -75,8 +75,8 @@ function About() {
           sx={{
             position: "relative",
             zIndex: 1,
-            pt: { xs: 7, md: 0 },
-            pb: { xs: 8, md: 10 },
+            pt: { xs: 2, md: 0 },
+            pb: { xs: 5, md: 10 },
             px: { xs: 3, md: 3 },
             textAlign: { xs: "center", md: "left" },
           }}
@@ -94,21 +94,28 @@ function About() {
               sx={{
                 display: { xs: "flex", md: "none" },
                 justifyContent: "center",
-                mb: 5,
+                mb: { xs: 3, sm: 4 },
               }}
             >
               <Box
                 component="img"
                 src="/img/about2-mobile.jpg"
                 alt="Michal Armon"
+                loading="lazy"
+                decoding="async"
                 sx={{
-                  width: { xs: 210, sm: 250 },
-                  height: { xs: 210, sm: 250 },
+                  width: { xs: 290, sm: 330 },
+                  height: { xs: 290, sm: 330 },
+                  maxWidth: "85vw",
+                  maxHeight: "85vw",
+                  aspectRatio: "1 / 1",
                   borderRadius: "50%",
                   objectFit: "cover",
                   objectPosition: "center",
                   border: "5px solid #FFFFFF",
+                  boxSizing: "border-box",
                   boxShadow: "0 12px 40px rgba(53,92,125,0.18)",
+                  flexShrink: 0,
                 }}
               />
             </Box>
@@ -120,7 +127,10 @@ function About() {
                 fontSize: { xs: "2.35rem", md: "5rem" },
                 fontWeight: 800,
                 lineHeight: 1.15,
-                letterSpacing: { xs: "-0.04em", md: "normal" },
+                letterSpacing: {
+                  xs: "-0.04em",
+                  md: "normal",
+                },
                 mb: 2,
               }}
             >
@@ -144,7 +154,10 @@ function About() {
                 component="span"
                 sx={{
                   fontWeight: 700,
-                  color: { xs: "#355C7D", md: "inherit" },
+                  color: {
+                    xs: "#355C7D",
+                    md: "inherit",
+                  },
                 }}
               >
                 Current Developer.
@@ -159,7 +172,10 @@ function About() {
                 maxWidth: 750,
                 mb: 4,
                 mx: { xs: "auto", md: 0 },
-                color: { xs: "#77727D", md: "inherit" },
+                color: {
+                  xs: "#77727D",
+                  md: "inherit",
+                },
               }}
             >
               I develop websites and applications with creative thinking,
@@ -196,7 +212,7 @@ function About() {
       <Container
         maxWidth="lg"
         sx={{
-          py: { xs: 7, md: 12 },
+          py: { xs: 5, md: 12 },
         }}
       >
         <Box
@@ -204,11 +220,16 @@ function About() {
             maxWidth: 950,
             mx: "auto",
             color: "#1C1C1C",
-            fontSize: { xs: "1.05rem", md: "1.4rem" },
+            fontSize: {
+              xs: "1.05rem",
+              md: "1.4rem",
+            },
             lineHeight: 1.9,
+
             "& p": {
               mb: 4,
             },
+
             "& p:first-of-type": {
               fontWeight: 600,
             },
