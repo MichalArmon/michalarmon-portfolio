@@ -36,6 +36,7 @@ function About() {
         }}
       >
         {/* Background image */}
+        {/* Background image */}
         <Box
           component="img"
           src="/img/about2.jpg"
@@ -46,7 +47,7 @@ function About() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: { xs: "80% center", md: "center" },
           }}
         />
 
