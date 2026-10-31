@@ -99,7 +99,7 @@ const showcaseProjects = [
       "An architectural portfolio showcasing my work as an architect, from residential design to architectural projects and visualizations. A clean, visually driven website where architecture, space, and design take center stage.",
     technologies: ["React", "Vite", "Web Design", "Architecture"],
     image: "/img/showcase/AMMS.png",
-    link: "",
+    link: "https://amms.co.il",
   },
 ];
 
