@@ -78,7 +78,7 @@ const apiProjects = [
     image: "/img/api/article-hub.png",
     link: "https://article-hub-qa2w.onrender.com/",
     // TODO: Replace with the Article Hub repository URL.
-    github: "https://github.com/MichalArmon",
+    github: "https://github.com/MichalArmon/django-react-final-project",
   },
   {
     id: "api-3",
@@ -97,7 +97,7 @@ const apiProjects = [
     image: "/img/api/class-flow.png",
     link: "https://classflow-project.netlify.app",
     // TODO: Replace with the ClassFlow repository URL.
-    github: "https://github.com/MichalArmon",
+    github: "https://github.com/MichalArmon/ClassFlow-project",
   },
 ];
 
