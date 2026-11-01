@@ -57,7 +57,7 @@ const apiProjects = [
     description: "A full-stack resort management and booking application.",
     technologies: ["React", "MUI", "Node.js", "MongoDB"],
     image: "/img/api/ban-tao.png",
-    link: "https://ban-tao-resort.netlify.app/resort",
+    link: "https://ban-tao-resort.netlify.app",
     github: "https://github.com/MichalArmon/ban-tao2026",
   },
   {
