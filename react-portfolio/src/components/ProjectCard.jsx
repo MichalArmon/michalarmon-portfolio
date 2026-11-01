@@ -325,7 +325,7 @@ function ProjectCard({ project }) {
                   letterSpacing: "0.1em",
                 }}
               >
-                EXPLORE PROJECT
+                VISIT WEBSITE
               </Typography>
 
               <NorthEastIcon
