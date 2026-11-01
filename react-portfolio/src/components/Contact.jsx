@@ -8,7 +8,9 @@ import {
   Button,
   Stack,
 } from "@mui/material";
+
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { useForm, ValidationError } from "@formspree/react";
 
 const colors = {
@@ -17,6 +19,8 @@ const colors = {
   rose: "#F8B195",
   blue: "#FFFFFF",
 };
+
+const whatsappLink = "https://wa.me/972586632566";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -149,8 +153,9 @@ function Contact() {
               color: colors.muted,
             }}
           >
-            Whether you're exploring a collaboration, considering me for a role,
-            or simply interested in connecting, I'd be glad to hear from you.
+            Whether you're considering a collaboration, thinking of me for a
+            role, or simply interested in connecting, I'd be glad to hear from
+            you.
           </Typography>
         </Box>
 
@@ -192,14 +197,66 @@ function Contact() {
               Good work begins with a thoughtful conversation.
             </Typography>
 
+            {/* ACCENT LINE */}
             <Box
               sx={{
                 width: 50,
                 height: 2,
                 bgcolor: colors.rose,
                 mt: 4,
+                mb: 4,
               }}
             />
+
+            {/* WHATSAPP LINK */}
+            <Button
+              component="a"
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={<WhatsAppIcon />}
+              endIcon={<ArrowOutwardIcon />}
+              aria-label="Contact me on WhatsApp"
+              sx={{
+                color: colors.ink,
+                px: 0,
+                py: 1.5,
+                borderRadius: 0,
+                fontSize: 14,
+                fontWeight: 600,
+                letterSpacing: "0.04em",
+                textTransform: "none",
+                borderBottom: "1px solid rgba(255,255,255,0.35)",
+                transition: "color 0.3s ease, border-color 0.3s ease",
+
+                "& .MuiButton-startIcon": {
+                  color: colors.rose,
+                  mr: 1,
+                },
+
+                "& .MuiButton-endIcon": {
+                  ml: 2,
+                  transition: "transform 0.3s ease",
+                },
+
+                "&:hover": {
+                  bgcolor: "transparent",
+                  color: colors.rose,
+                  borderColor: colors.rose,
+
+                  "& .MuiButton-endIcon": {
+                    transform: "translate(3px, -3px)",
+                  },
+                },
+
+                "&:focus-visible": {
+                  outline: `2px solid ${colors.rose}`,
+                  outlineOffset: 5,
+                },
+              }}
+            >
+              Let's talk on WhatsApp
+            </Button>
           </Box>
 
           {/* RIGHT COLUMN — FORM */}
@@ -273,7 +330,9 @@ function Contact() {
                       autoComplete="name"
                       placeholder="Your name"
                       sx={inputStyles}
-                      inputProps={{ "aria-label": "Name" }}
+                      inputProps={{
+                        "aria-label": "Name",
+                      }}
                     />
                   </FormControl>
 
@@ -291,7 +350,9 @@ function Contact() {
                       autoComplete="email"
                       placeholder="you@example.com"
                       sx={inputStyles}
-                      inputProps={{ "aria-label": "Email" }}
+                      inputProps={{
+                        "aria-label": "Email",
+                      }}
                     />
 
                     <ValidationError
@@ -315,7 +376,9 @@ function Contact() {
                       minRows={4}
                       placeholder="Tell me a little about what you have in mind..."
                       sx={inputStyles}
-                      inputProps={{ "aria-label": "Message" }}
+                      inputProps={{
+                        "aria-label": "Message",
+                      }}
                     />
 
                     <ValidationError
@@ -387,7 +450,10 @@ function Contact() {
             sx={{
               color: colors.muted,
               fontSize: 13,
-              textAlign: { xs: "center", md: "left" },
+              textAlign: {
+                xs: "center",
+                md: "left",
+              },
               order: { xs: 3, md: 1 },
               whiteSpace: "nowrap",
             }}
@@ -426,7 +492,10 @@ function Contact() {
             useFlexGap
             flexWrap="wrap"
             sx={{
-              justifyContent: { xs: "center", md: "flex-end" },
+              justifyContent: {
+                xs: "center",
+                md: "flex-end",
+              },
               order: { xs: 2, md: 3 },
             }}
           >
