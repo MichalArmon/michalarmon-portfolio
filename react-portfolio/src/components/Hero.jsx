@@ -296,7 +296,7 @@ function Hero() {
               letterSpacing: "0.15em",
             }}
           >
-            SCROLL TO EXPLORE
+            SCROLL TO MY WORK
           </Typography>
           <SouthIcon sx={{ fontSize: 16 }} />
         </Box>
